@@ -1,0 +1,21 @@
+name: Trigger Deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Trigger main deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: convictional/trigger-workflow-and-wait@v1.3.0
+        with:
+          owner: nalmeida
+          repo: gympass-public-docs
+          github_token: ${{ secrets.G_ACCESS_TOKEN }}
+          workflow_file_name: main.yml
+      - name: Deploy Docs
+        run: |
+          echo "Deploy Docs"
+          sleep 10s
